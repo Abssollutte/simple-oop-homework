@@ -10,7 +10,8 @@ public class TaskStream {
      * @return сумма по всем книгам
      */
     public static double task1(List<Book> books) {
-        return 0.0;
+
+        return books.stream().mapToDouble(Book::getPrice).sum();
     }
 
     /**
@@ -20,7 +21,7 @@ public class TaskStream {
      * @return количество уникальных авторов
      */
     public static long task2(List<Book> books) {
-        return 0;
+        return books.stream().collect(Collectors.groupingBy((o -> o.getAuthor()))).size();
     }
 
     /**
@@ -30,7 +31,7 @@ public class TaskStream {
      * @return ожидаемый мап
      */
     public static Map<String, List<String>> task3(List<Book> books) {
-        return Collections.emptyMap();
+        return books.stream().collect(Collectors.toMap(Book::getTitle, Book::getReviews));
     }
 
     /**
@@ -41,7 +42,7 @@ public class TaskStream {
      * @return ожидаемый мап
      */
     public static Map<String, List<String>> task4(List<Book> books) {
-        return Collections.emptyMap();
+        return books.stream().filter(book -> !book.getReviews().isEmpty()).collect(Collectors.toMap(Book::getTitle, Book::getReviews));
     }
 
     /**
@@ -51,7 +52,7 @@ public class TaskStream {
      * @return список отзывов
      */
     public static List<String> task5(List<Book> books) {
-        return Collections.emptyList();
+        return books.stream().map(Book::getReviews).flatMap(List::stream).toList();
     }
 
     /**
@@ -61,7 +62,7 @@ public class TaskStream {
      * @return среднюю стоимость книги
      */
     public static double task6(List<Book> books) {
-        return 0.;
+        return books.stream().mapToDouble(Book::getPrice).average().getAsDouble();
     }
 
     /**
@@ -71,7 +72,7 @@ public class TaskStream {
      * @return результат
      */
     public static boolean task7(List<Book> books) {
-        return false;
+        return books.stream().allMatch((book -> book.getAuthor() != null));
     }
 
     /**
@@ -81,7 +82,7 @@ public class TaskStream {
      * @return не больше 3 названий книг
      */
     public static Set<String> task8(List<Book> books) {
-        return Collections.emptySet();
+        return books.stream().map((Book::getTitle)).collect(Collectors.toSet());
     }
 
     /**
@@ -91,7 +92,7 @@ public class TaskStream {
      * @return
      */
     public static List<Book> task9(List<Book> books) {
-        return Collections.emptyList();
+        return books.stream().filter(book -> book.getTitle())
     }
 
     /**
@@ -123,4 +124,6 @@ public class TaskStream {
     public static Book task12(List<Book> books) {
         return null;
     }
+
+
 }
