@@ -115,7 +115,8 @@ public class TaskStream {
      * @return
      */
     public static List<Book> task9(List<Book> books) {
-        return books.stream().filter(book -> book.getTitle().matches(".*[02468].*"))
+//        return books.stream().filter(book -> book.getTitle().matches(".*[02468].*"))
+        return Collections.emptyList();
     }
 
     /**
