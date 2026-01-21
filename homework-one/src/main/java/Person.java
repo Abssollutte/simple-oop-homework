@@ -1,12 +1,12 @@
 import lombok.*;
 
-@Setter
 @Getter
 @ToString
 @EqualsAndHashCode
-public class Person {
+public abstract class Person {
     private String name;
     private int age;
+    private boolean married;
 
     public Person(String name, int age, boolean married) {
         this.name = name;
@@ -14,7 +14,7 @@ public class Person {
         this.married = married;
     }
 
-    private boolean married;
+
 
     public void display() {
         System.out.println(this);

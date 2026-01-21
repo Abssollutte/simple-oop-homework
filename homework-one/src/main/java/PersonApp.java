@@ -5,21 +5,21 @@ import java.util.Arrays;
 
 @UtilityClass
 public class PersonApp {
-    public static void companyInfo(@NonNull Employee[] employees) {
-        Arrays.stream(employees).forEach(System.out::println);
+    public void companyInfo(@NonNull Employee[] employees) {
+        Arrays.stream(employees).forEach(Person::display);
     }
 
-    public static double costOfCompany(@NonNull Employee[] employees) {
+    public double costOfCompany(@NonNull Employee[] employees) {
 
         return Arrays.stream(employees)
-                .mapToDouble(Employee::getBaseSalary)
+                .mapToDouble(Employee::calculateSalary)
                 .sum();
     }
 
-    public static double companyIncome(@NonNull Employee[] employees) {
+    public double companyIncome(@NonNull Employee[] employees) {
 
         return Arrays.stream(employees)
-                .filter((o1) -> o1 instanceof SaleManager)
+                .filter((o1) -> o1.getClass().equals(SaleManager.class))
                 .map(Employee -> (SaleManager) Employee)
                 .mapToDouble(SaleManager::getTotalSales)
                 .sum();
@@ -27,8 +27,9 @@ public class PersonApp {
 
     }
 
-    public static boolean findEmployee(@NonNull Employee[] employees, @NonNull Employee employee) {
-        return Arrays.stream(employees)
-                .anyMatch(employee1 -> employee1.equals(employee));
+    public boolean findEmployee(@NonNull Employee[] employees, @NonNull Employee employee) {
+//        return Arrays.stream(employees)
+//                .anyMatch(employee1 -> employee1.equals(employee));
+        return Arrays.asList(employees).contains(employee);
     }
 }

@@ -1,13 +1,12 @@
 import lombok.*;
 
-@Setter
 @Getter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Employee extends Person{
-    String company;
-    String position;
-    double baseSalary;
+public abstract class Employee extends Person{
+    private String company;
+    private String position;
+    private double baseSalary;
 
 
     public Employee(String name, int age, boolean married, String company, String position, double baseSalary) {
@@ -16,4 +15,7 @@ public class Employee extends Person{
         this.position = position;
         this.baseSalary = baseSalary;
     }
+
+    public abstract double calculateSalary();
+
 }

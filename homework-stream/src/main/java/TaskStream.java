@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class TaskStream {
 
@@ -115,8 +114,8 @@ public class TaskStream {
      * @return
      */
     public static List<Book> task9(List<Book> books) {
-//        return books.stream().filter(book -> book.getTitle().matches(".*[02468].*"))
-        return Collections.emptyList();
+        return books.stream().filter(book -> book.getTitle().matches(".*[02468].*"))
+                .filter(book -> book.getPrice() < 100).toList();
     }
 
     /**
@@ -126,7 +125,17 @@ public class TaskStream {
      * @return Map с двумя ключами
      */
     public static Map<String, List<Book>> task10(List<Book> books) {
-        return Collections.emptyMap();
+//        return books.stream()
+//                .collect(Collectors.partitioningBy(book -> book.getPrice() > 50,  Collectors.toList()))
+//                .entrySet()
+//                .stream()
+//                .collect(Collectors.toMap(
+//                        entry -> entry.getKey() ? "OK" : "Not Ok",
+//                        (Map.Entry::getValue)
+//                ));
+        return books.stream()
+                .collect(Collectors.groupingBy(book -> book.getPrice() < 50 ? "OK" : "Not Ok"));
+
     }
 
     /**
@@ -136,7 +145,11 @@ public class TaskStream {
      * @return список книг с интересными отзывами
      */
     public static List<Book> task11(List<Book> books) {
-        return Collections.emptyList();
+        return books.stream()
+                .filter(book -> book.getReviews().stream()
+                        .anyMatch(str -> str.toLowerCase().contains("рекомендую")))
+                .toList();
+
     }
 
     /**
@@ -146,7 +159,9 @@ public class TaskStream {
      * @return самая дешевая книга
      */
     public static Book task12(List<Book> books) {
-        return null;
+        return books.stream()
+                .min(Comparator.comparingDouble(Book::getPrice))
+                .orElseThrow();
     }
 
 

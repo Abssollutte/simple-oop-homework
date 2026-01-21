@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>simple-oop-homework</groupId>
-    <artifactId>homework-one</artifactId>
+    <artifactId>homework-stream</artifactId>
     <version>1.0</version>
 
     <properties>
